@@ -2,7 +2,7 @@ import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { AuthModal } from "@/components/auth/AuthModal";
-import { auth } from "@/auth";
+import { auth, signOut } from "@/auth";
 
 export default async function PublicNavbar() {
   const session = await auth();
@@ -15,9 +15,21 @@ export default async function PublicNavbar() {
       <nav className="flex items-center gap-6 text-sm font-medium text-zinc-600 dark:text-zinc-400">
         <Link href="/blog" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Artikel</Link>
         {session ? (
-          <Link href="/admin" className={buttonVariants({ variant: "outline", size: "sm" })}>
-            Dashboard
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link href="/admin" className={buttonVariants({ variant: "outline", size: "sm" })}>
+              Dashboard
+            </Link>
+            <form
+              action={async () => {
+                "use server";
+                await signOut();
+              }}
+            >
+              <button type="submit" className="text-sm font-medium text-red-600 hover:text-red-700 transition-colors">
+                Logout
+              </button>
+            </form>
+          </div>
         ) : (
           <AuthModal />
         )}
