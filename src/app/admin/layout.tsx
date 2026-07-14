@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import AdminNav from "@/components/AdminNav";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminLayout({ children }: { children: ReactNode }) {
   const session = await auth();
 
