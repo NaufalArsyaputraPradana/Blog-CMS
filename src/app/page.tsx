@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/componen
 import { buttonVariants } from "@/components/ui/button";
 import PublicNavbar from "@/components/PublicNavbar";
 import PublicFooter from "@/components/PublicFooter";
+import { AuthModal } from "@/components/auth/AuthModal";
 
 export const metadata = {
   title: "Blog CMS - Home",
@@ -45,9 +46,7 @@ export default async function HomePage() {
                 <Link href="/blog" className={buttonVariants({ size: "lg" })}>
                   Mulai Membaca
                 </Link>
-                <Link href="/register" className={buttonVariants({ variant: "outline", size: "lg" })}>
-                  Bergabung Menulis
-                </Link>
+                <AuthModal triggerText="Bergabung Menulis" triggerSize="lg" defaultView="register" />
               </div>
             </div>
             <div className="relative mx-auto w-full max-w-lg lg:max-w-none aspect-square">

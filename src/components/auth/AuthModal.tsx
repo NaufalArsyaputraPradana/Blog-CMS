@@ -7,22 +7,36 @@ import { RegisterForm } from "@/components/auth/RegisterForm";
 import { buttonVariants } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
-export function AuthModal({ defaultOpen = false }: { defaultOpen?: boolean }) {
+export function AuthModal({ 
+  defaultOpen = false,
+  triggerText = "Login Penulis",
+  triggerClassName,
+  triggerVariant = "outline",
+  triggerSize = "sm",
+  defaultView = "login"
+}: { 
+  defaultOpen?: boolean;
+  triggerText?: React.ReactNode;
+  triggerClassName?: string;
+  triggerVariant?: any;
+  triggerSize?: any;
+  defaultView?: "login" | "register";
+}) {
   const [open, setOpen] = useState(defaultOpen);
-  const [view, setView] = useState<"login" | "register">("login");
+  const [view, setView] = useState<"login" | "register">(defaultView);
   const router = useRouter();
 
   const handleOpenChange = (newOpen: boolean) => {
     setOpen(newOpen);
     if (!newOpen) {
-      setTimeout(() => setView("login"), 300); // Reset view when closed
+      setTimeout(() => setView(defaultView), 300); // Reset view when closed
     }
   };
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogTrigger className={buttonVariants({ variant: "outline", size: "sm" })}>
-        Login Penulis
+      <DialogTrigger className={buttonVariants({ variant: triggerVariant, size: triggerSize, className: triggerClassName })}>
+        {triggerText}
       </DialogTrigger>
       <DialogContent className="sm:max-w-md p-0 overflow-hidden bg-transparent border-none shadow-none">
         <div className="bg-white/90 dark:bg-zinc-950/90 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 shadow-2xl rounded-xl">
