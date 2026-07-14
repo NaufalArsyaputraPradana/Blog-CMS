@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 
 async function isSuperAdmin() {
   const session = await auth();
-  return session?.user?.role === "SUPERADMIN";
+  return (session?.user as any)?.role === "SUPERADMIN";
 }
 
 export async function deleteUser(userId: string) {

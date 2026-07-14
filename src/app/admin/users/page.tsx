@@ -13,7 +13,7 @@ export const metadata = {
 export default async function UsersPage() {
   const session = await auth();
 
-  if (session?.user?.role !== "SUPERADMIN") {
+  if ((session?.user as any)?.role !== "SUPERADMIN") {
     redirect("/admin");
   }
 
