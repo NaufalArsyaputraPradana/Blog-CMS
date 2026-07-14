@@ -5,10 +5,12 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { LoginForm } from "@/components/auth/LoginForm";
 import { RegisterForm } from "@/components/auth/RegisterForm";
 import { buttonVariants } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 export function AuthModal({ defaultOpen = false }: { defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
   const [view, setView] = useState<"login" | "register">("login");
+  const router = useRouter();
 
   const handleOpenChange = (newOpen: boolean) => {
     setOpen(newOpen);
@@ -19,7 +21,7 @@ export function AuthModal({ defaultOpen = false }: { defaultOpen?: boolean }) {
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogTrigger className={buttonVariants({ variant: "outline", size: "sm", className: "hidden sm:inline-flex" })}>
+      <DialogTrigger className={buttonVariants({ variant: "outline", size: "sm" })}>
         Login Penulis
       </DialogTrigger>
       <DialogContent className="sm:max-w-md p-0 overflow-hidden bg-transparent border-none shadow-none">
@@ -28,13 +30,13 @@ export function AuthModal({ defaultOpen = false }: { defaultOpen?: boolean }) {
             <LoginForm 
               asModal 
               onSwitchToRegister={() => setView("register")}
-              onSuccess={() => setOpen(false)}
+              onSuccess={() => { setOpen(false); router.refresh(); router.push("/admin"); }}
             />
           ) : (
             <RegisterForm 
               asModal 
               onSwitchToLogin={() => setView("login")}
-              onSuccess={() => setOpen(false)}
+              onSuccess={() => { setOpen(false); router.refresh(); router.push("/admin"); }}
             />
           )}
         </div>

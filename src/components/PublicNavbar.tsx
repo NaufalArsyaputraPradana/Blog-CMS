@@ -15,7 +15,7 @@ export default async function PublicNavbar() {
       <nav className="flex items-center gap-6 text-sm font-medium text-zinc-600 dark:text-zinc-400">
         <Link href="/blog" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Artikel</Link>
         {session ? (
-          <Link href="/admin" className={buttonVariants({ variant: "outline", size: "sm", className: "hidden sm:inline-flex" })}>
+          <Link href="/admin" className={buttonVariants({ variant: "outline", size: "sm" })}>
             Dashboard
           </Link>
         ) : (

@@ -23,7 +23,7 @@ export default function AdminNav({ role }: { role?: string }) {
   );
 
   return (
-    <nav className="flex flex-col gap-2 p-4 text-sm font-medium">
+    <nav className="flex flex-row md:flex-col gap-2 p-3 md:p-4 text-sm font-medium">
       {filteredNavItems.map((item) => {
         const isActive = pathname === item.href || (item.href !== "/admin" && pathname?.startsWith(item.href));
         
@@ -32,14 +32,14 @@ export default function AdminNav({ role }: { role?: string }) {
             key={item.href}
             href={item.href}
             className={cn(
-              "flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-200 group active:scale-[0.98]",
+              "flex items-center gap-2 md:gap-3 rounded-xl px-3 py-2 md:px-4 md:py-3 transition-all duration-200 group active:scale-[0.98] whitespace-nowrap",
               isActive 
                 ? "bg-blue-600 text-white shadow-md shadow-blue-500/20" 
                 : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 hover:text-zinc-900 dark:hover:text-zinc-50"
             )}
           >
-            <item.icon className={cn("size-5 transition-transform duration-200", !isActive && "group-hover:scale-110")} />
-            <span className="font-semibold">{item.name}</span>
+            <item.icon className={cn("size-4 md:size-5 shrink-0 transition-transform duration-200", !isActive && "group-hover:scale-110")} />
+            <span className="font-medium md:font-semibold">{item.name}</span>
           </Link>
         );
       })}

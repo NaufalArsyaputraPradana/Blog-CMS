@@ -38,8 +38,8 @@ export default async function AdminLayout({ children }: { children: ReactNode })
           </form>
         </div>
       </header>
-      <div className="flex flex-1 w-full overflow-hidden">
-        <aside className="w-64 border-r border-zinc-200/50 bg-white/50 dark:border-zinc-800/50 dark:bg-zinc-950/50 hidden md:block overflow-y-auto">
+      <div className="flex flex-col md:flex-row flex-1 w-full overflow-hidden">
+        <aside className="w-full md:w-64 border-b md:border-r border-zinc-200/50 bg-white/50 dark:border-zinc-800/50 dark:bg-zinc-950/50 shrink-0 overflow-x-auto md:overflow-y-auto">
           <AdminNav role={(session.user as any)?.role as string} />
         </aside>
         <main className="flex-1 p-6 md:p-8 overflow-y-auto">
