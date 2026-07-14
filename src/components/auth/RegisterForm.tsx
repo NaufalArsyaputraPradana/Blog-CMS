@@ -64,9 +64,6 @@ export function RegisterForm({
           } else {
             router.push("/admin");
           }
-          if (asModal) {
-            router.refresh();
-          }
         }
       } else {
         toast.error(data.message || "Gagal mendaftar");

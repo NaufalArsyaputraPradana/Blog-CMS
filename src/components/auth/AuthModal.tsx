@@ -30,13 +30,13 @@ export function AuthModal({ defaultOpen = false }: { defaultOpen?: boolean }) {
             <LoginForm 
               asModal 
               onSwitchToRegister={() => setView("register")}
-              onSuccess={() => { setOpen(false); router.refresh(); router.push("/admin"); }}
+              onSuccess={() => { setOpen(false); window.location.href = "/admin"; }}
             />
           ) : (
             <RegisterForm 
               asModal 
               onSwitchToLogin={() => setView("login")}
-              onSuccess={() => { setOpen(false); router.refresh(); router.push("/admin"); }}
+              onSuccess={() => { setOpen(false); window.location.href = "/admin"; }}
             />
           )}
         </div>

@@ -46,10 +46,6 @@ export function LoginForm({
       } else {
         router.push("/admin");
       }
-      if (asModal) {
-        // Soft refresh for modal context
-        router.refresh();
-      }
     }
   };
 
