@@ -23,7 +23,7 @@ export default async function AdminDashboard() {
     prisma.comment.count({ where: { status: "PENDING" } }),
     prisma.media.count(),
     prisma.post.findMany({ orderBy: { createdAt: 'desc' }, take: 5, include: { author: true } }),
-    prisma.comment.findMany({ orderBy: { createdAt: 'desc' }, take: 5, include: { post: true } })
+    prisma.comment.findMany({ orderBy: { createdAt: 'desc' }, take: 5, include: { post: true, author: true } })
   ]);
 
   return (
@@ -141,7 +141,7 @@ export default async function AdminDashboard() {
                 {recentComments.map(comment => (
                   <div key={comment.id} className="border-b border-zinc-100 dark:border-zinc-800 pb-4 last:border-0 last:pb-0">
                     <div className="flex justify-between items-start mb-1">
-                      <span className="font-medium text-sm">{comment.authorName}</span>
+                      <span className="font-medium text-sm">{comment.author?.name || comment.guestName || 'Anonim'}</span>
                       <span className={`text-[10px] px-2 py-0.5 rounded-full uppercase font-bold ${comment.status === 'APPROVED' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400'}`}>
                         {comment.status}
                       </span>
