@@ -10,8 +10,11 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminLayout({ children }: { children: ReactNode }) {
   const session = await auth();
-
-  // Middleware handles redirection now
+  
+  // Middleware handles actual Edge protection, but we keep this for TypeScript type narrowing
+  if (!session) {
+    redirect("/");
+  }
 
 
   return (
