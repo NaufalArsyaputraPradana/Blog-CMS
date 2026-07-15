@@ -15,7 +15,7 @@ export const proxy = auth((req) => {
       return NextResponse.redirect(new URL("/", req.nextUrl));
     }
 
-    const userRole = (req.auth.user as any)?.role;
+    const userRole = (req.auth?.user as any)?.role;
     if (userRole !== "SUPERADMIN" && userRole !== "AUTHOR") {
       return NextResponse.redirect(new URL("/", req.nextUrl));
     }
