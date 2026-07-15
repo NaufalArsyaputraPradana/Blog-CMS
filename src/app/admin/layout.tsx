@@ -11,9 +11,8 @@ export const dynamic = "force-dynamic";
 export default async function AdminLayout({ children }: { children: ReactNode }) {
   const session = await auth();
 
-  if (!session) {
-    redirect("/");
-  }
+  // Middleware handles redirection now
+
 
   return (
     <div className="min-h-screen bg-zinc-50/50 dark:bg-zinc-950/50 flex flex-col">
