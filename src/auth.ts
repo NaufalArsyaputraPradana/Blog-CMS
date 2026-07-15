@@ -4,6 +4,13 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 
+// If deployed on Vercel, ignore any mistakenly set localhost AUTH_URL
+// This ensures NextAuth correctly uses secure cookies (https) in production.
+if (process.env.VERCEL) {
+  delete process.env.AUTH_URL;
+  delete process.env.NEXTAUTH_URL;
+}
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
   trustHost: true,
   adapter: PrismaAdapter(prisma),
