@@ -1,20 +1,29 @@
+import { auth } from "@/auth";
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-import { getToken } from "next-auth/jwt";
 
-export async function proxy(request: NextRequest) {
-  const token = await getToken({ req: request, secret: process.env.AUTH_SECRET });
-  
-  // Protect admin routes
-  if (request.nextUrl.pathname.startsWith("/admin")) {
-    if (!token) {
-      return NextResponse.redirect(new URL("/", request.url));
+export const proxy = auth((req) => {
+  const isLoggedIn = !!req.auth;
+  const isApiAuthRoute = req.nextUrl.pathname.startsWith("/api/auth");
+  const isAdminRoute = req.nextUrl.pathname.startsWith("/admin");
+
+  if (isApiAuthRoute) {
+    return NextResponse.next();
+  }
+
+  if (isAdminRoute) {
+    if (!isLoggedIn) {
+      return NextResponse.redirect(new URL("/", req.nextUrl));
+    }
+
+    const userRole = (req.auth.user as any)?.role;
+    if (userRole !== "SUPERADMIN" && userRole !== "AUTHOR") {
+      return NextResponse.redirect(new URL("/", req.nextUrl));
     }
   }
 
   return NextResponse.next();
-}
+});
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
 };
