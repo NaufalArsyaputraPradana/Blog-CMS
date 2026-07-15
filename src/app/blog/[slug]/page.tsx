@@ -27,8 +27,13 @@ export async function generateMetadata({ params }: PageProps) {
 }
 
 export async function generateStaticParams() {
-  const posts = await prisma.post.findMany({ where: { published: true }, select: { slug: true } });
-  return posts.map(post => ({ slug: post.slug }));
+  try {
+    const posts = await prisma.post.findMany({ where: { published: true }, select: { slug: true } });
+    return posts.map(post => ({ slug: post.slug }));
+  } catch (error) {
+    console.warn("Skipping static params generation due to DB error at build time:", error);
+    return [];
+  }
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
