@@ -117,14 +117,17 @@ export default function GoogleTranslate() {
       {/* Hidden div required by Google Translate */}
       <div id="google_translate_element2" className="hidden"></div>
       
-      {/* Floating Toggle Button */}
+      {/* Floating Toggle Button (SaaS Aesthetic) */}
       <button 
         onClick={toggleLanguage}
-        className="flex items-center gap-2 px-4 py-3 rounded-full bg-white dark:bg-zinc-800 shadow-lg border border-zinc-200 dark:border-zinc-700 hover:shadow-xl hover:scale-105 transition-all text-sm font-bold text-zinc-700 dark:text-zinc-200"
+        className="flex items-center gap-2 px-4 py-3 rounded-full bg-slate-900 border border-blue-500/30 shadow-2xl shadow-blue-900/40 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:border-blue-500/60 hover:scale-105 transition-all duration-300 text-sm font-bold text-slate-200 group"
         title="Ubah Bahasa / Translate"
       >
-        <canvas id="flagCanvasGlobal" width="20" height="15" className="rounded-sm"></canvas>
-        <span>{currentLang === 'id' ? 'ID' : 'EN'}</span>
+        <div className="relative">
+          <div className="absolute inset-0 bg-blue-500 rounded-sm blur-[2px] opacity-0 group-hover:opacity-50 transition-opacity"></div>
+          <canvas id="flagCanvasGlobal" width="20" height="15" className="relative rounded-sm z-10"></canvas>
+        </div>
+        <span className="notranslate w-6 text-center">{currentLang === 'id' ? 'ID' : 'EN'}</span>
       </button>
     </div>
   );
