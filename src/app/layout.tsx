@@ -19,6 +19,8 @@ export const metadata: Metadata = {
 };
 
 import { ThemeProvider } from "@/components/ThemeProvider";
+import PromoPopups from "@/components/PromoPopups";
+import GoogleTranslate from "@/components/GoogleTranslate";
 
 export default function RootLayout({
   children,
@@ -40,6 +42,8 @@ export default function RootLayout({
         >
           {children}
           <Toaster position="top-right" richColors />
+          <PromoPopups />
+          <GoogleTranslate />
         </ThemeProvider>
       </body>
     </html>
