@@ -155,3 +155,26 @@
 .prose blockquote { @apply border-l-4 border-zinc-300 pl-4 italic text-zinc-700 dark:text-zinc-300 dark:border-zinc-700 my-4; }
 .prose code { @apply bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded font-mono text-sm; }
 .prose img { @apply rounded-lg mx-auto my-6; }
+
+/* Hide Google Translate top banner and tooltips */
+.goog-te-banner-frame {
+  display: none !important;
+}
+body {
+  top: 0px !important;
+}
+.goog-tooltip {
+  display: none !important;
+}
+.goog-tooltip:hover {
+  display: none !important;
+}
+.goog-text-highlight {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+/* Also hide the "Diterjemahkan ke" body text from the translation frame if any */
+body > .skiptranslate {
+  display: none !important;
+}

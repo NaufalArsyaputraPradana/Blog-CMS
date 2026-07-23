@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 // Declare global to avoid TS errors
 declare global {
@@ -105,10 +106,16 @@ export default function GoogleTranslate() {
       doGTranslate('id|en');
       setCurrentLang('en');
       drawFlag('flagCanvasGlobal', 'en');
+      toast.success("Bahasa diubah ke English", {
+        description: "Language has been changed to English."
+      });
     } else {
       doGTranslate('en|id');
       setCurrentLang('id');
       drawFlag('flagCanvasGlobal', 'id');
+      toast.success("Language changed to Indonesian", {
+        description: "Bahasa telah diubah kembali ke Indonesia."
+      });
     }
   };
 
